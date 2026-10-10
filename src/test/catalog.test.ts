@@ -11,15 +11,21 @@ describe('Collection requirements', () => {
   });
 });
 describe('Catalogue interactions', () => {
+  it('replaces old dresses with the uploaded midi and preserves beachwear', () => {
+    expect(products.map(p=>p.slug)).toEqual(['aurelia-floral-midi', 'leela-printed-kaftan']);
+    expect(products.filter(p=>p.category==='maxi-dresses')).toHaveLength(0);
+    expect(products.find(p=>p.slug==='aurelia-floral-midi')?.gallery).toHaveLength(6);
+    expect(products.find(p=>p.slug==='leela-printed-kaftan')?.price).toBe(520);
+  });
   it('requires a valid size before adding a piece', () => {
     expect(canAddToBag('')).toBe(false);
     expect(canAddToBag('M')).toBe(true);
     expect(canAddToBag('unknown')).toBe(false);
   });
   it('filters by selected fabric', () => {
-    expect(filterProducts(products, ['Handwoven silk'], [], 'featured').map(p => p.slug)).toEqual(['tara-silk-midi']);
+    expect(filterProducts(products, ['Floral print · Smocked bodice'], [], 'featured').map(p => p.slug)).toEqual(['aurelia-floral-midi']);
   });
   it('sorts prices in ascending order', () => {
-    expect(filterProducts(products, [], [], 'price-low').map(p => p.price)).toEqual([520, 680, 890, 940]);
+    expect(filterProducts(products, [], [], 'price-low').map(p => p.price)).toEqual([520, null]);
   });
 });
