@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CollectionsCollectionRouteImport } from './routes/collections.$collection'
+import { Route as ProductsProductRouteImport } from './routes/products.$product'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CollectionsCollectionRoute = CollectionsCollectionRouteImport.update({
+  id: '/collections/$collection',
+  path: '/collections/$collection',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsProductRoute = ProductsProductRouteImport.update({
+  id: '/products/$product',
+  path: '/products/$product',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/collections/$collection': typeof CollectionsCollectionRoute
+  '/products/$product': typeof ProductsProductRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/collections/$collection': typeof CollectionsCollectionRoute
+  '/products/$product': typeof ProductsProductRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/collections/$collection': typeof CollectionsCollectionRoute
+  '/products/$product': typeof ProductsProductRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/collections/$collection' | '/products/$product'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/collections/$collection' | '/products/$product'
+  id: '__root__' | '/' | '/collections/$collection' | '/products/$product'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CollectionsCollectionRoute: typeof CollectionsCollectionRoute
+  ProductsProductRoute: typeof ProductsProductRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/collections/$collection': {
+      id: '/collections/$collection'
+      path: '/collections/$collection'
+      fullPath: '/collections/$collection'
+      preLoaderRoute: typeof CollectionsCollectionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/$product': {
+      id: '/products/$product'
+      path: '/products/$product'
+      fullPath: '/products/$product'
+      preLoaderRoute: typeof ProductsProductRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CollectionsCollectionRoute: CollectionsCollectionRoute,
+  ProductsProductRoute: ProductsProductRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
