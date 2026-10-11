@@ -36,7 +36,7 @@ describe('Catalogue interactions', () => {
     expect(filterProducts(products, ['Floral print · Smocked bodice'], [], 'featured').map(p => p.slug)).toEqual(['aurelia-floral-midi']);
   });
   it('sorts prices in ascending order', () => {
-    const items = [{...products[0], price: 520}, {...products[1], price: 300}, {...products[2], price: null}];
+    const items = products.map((product, index) => ({...product, price: index === 0 ? 520 : index === 1 ? 300 : null}));
     expect(filterProducts(items, [], [], 'price-low').map(p => p.price)).toEqual([300, 520, null]);
   });
 });
