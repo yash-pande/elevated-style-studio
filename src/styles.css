@@ -29,6 +29,8 @@
   --color-rose: var(--rose);
   --color-terracotta: var(--terracotta);
   --color-ivory: var(--ivory);
+  --color-royal-blue: var(--royal-blue);
+  --color-botanical-blue: var(--botanical-blue);
   --radius-sm: 2px;
   --radius-md: 4px;
   --radius-lg: 6px;
@@ -50,6 +52,8 @@
   --rose: oklch(0.69 0.064 20);
   --terracotta: oklch(0.60 0.12 40);
   --ivory: oklch(0.92 0.029 85);
+  --royal-blue: oklch(0.40 0.17 268);
+  --botanical-blue: oklch(0.55 0.16 255);
   --destructive: oklch(0.53 0.17 28);
   --veil: color-mix(in oklab, var(--foreground) 35%, transparent);
   --shadow-panel: 0 12px 60px color-mix(in oklab, var(--foreground) 10%, transparent);
@@ -106,6 +110,8 @@
   .swatch-rose { background:var(--rose); }
   .swatch-terracotta { background:var(--terracotta); }
   .swatch-ivory { background:var(--ivory); }
+  .swatch-royal-blue { background:var(--royal-blue); }
+  .swatch-botanical-blue { background:var(--botanical-blue); }
   .catalog-end { display:flex; flex-direction:column; align-items:center; gap:14px; padding:43px 0 50px; color:var(--muted-foreground); font-size:10px; }
   .catalog-end-line { width:115px; height:1px; background:var(--gold); }
   .coming-band { border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:48px 0; display:flex; align-items:center; justify-content:space-between; gap:30px; }
@@ -139,8 +145,9 @@
   .pdp-photo { position:relative; width:100%; aspect-ratio:2/3; overflow:hidden; background:var(--secondary); }
   .pdp-photo img { width:100%; height:100%; object-fit:cover; }
   .pdp-photo.detail img { transform:scale(2.2); transform-origin:50% 42%; }
-  .gallery-thumbs { display:flex; gap:12px; margin-top:16px; }
-  .gallery-thumb { width:66px; height:90px; padding:0; overflow:hidden; border:1px solid transparent; opacity:.7; }
+  .pdp-photo.contain img { object-fit:contain; }
+  .gallery-thumbs { display:flex; flex-wrap:wrap; gap:12px; margin-top:16px; }
+  .gallery-thumb { flex-shrink:0; width:66px; height:90px; padding:0; overflow:hidden; border:1px solid transparent; opacity:.7; }
   .gallery-thumb[aria-pressed="true"] { border-color:var(--gold); opacity:1; }
   .gallery-thumb img { width:100%; height:100%; object-fit:cover; }
   .gallery-thumb.detail img { transform:scale(2.2); }
