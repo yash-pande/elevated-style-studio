@@ -3,6 +3,7 @@ import { Link } from '@tanstack/react-router';
 import { ArrowRight, ChevronDown, Heart, Leaf, Menu, Search, ShoppingBag, Sparkles, X, Trash2, Minus, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { collections, products, formatPrice, type Product, type Size } from '@/lib/catalog';
+import yaminiLogo from '@/assets/yamini-logo.png.asset.json';
 
 type BagItem = { product: Product; size: Size; quantity: number };
 type Panel = 'search' | 'saved' | 'bag' | 'menu' | null;
@@ -10,7 +11,7 @@ type ShopState = { saved: string[]; toggleSaved: (slug:string) => void; bag: Bag
 const ShopContext = createContext<ShopState | null>(null);
 export function useShop() { const context=useContext(ShopContext); if (!context) throw new Error('Shop context is missing'); return context; }
 export function Brand({ header = false }: { header?:boolean }) {
-  return <Link to="/" className={`brand ${header ? 'header-brand' : ''}`} aria-label="Yamini Studio home"><img src="/favicon.svg" className="brand-emblem" width={29} height={29} alt=""/><span className="brand-name">Y A M I N I</span><span className="brand-subtitle">S T U D I O</span></Link>;
+  return <Link to="/" className={`brand ${header ? 'header-brand' : ''}`} aria-label="Yamini Studio home"><img src={yaminiLogo.url} className="brand-logo" width={557} height={448} alt="Yamini Studio"/></Link>;
 }
 export function ShopShell({children}:{children:ReactNode}) {
   const [saved,setSaved]=useState<string[]>([]);
